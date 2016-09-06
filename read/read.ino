@@ -1,7 +1,7 @@
 //read
 
 int led = 9;
-int brightness = 32;
+int brightness = 64;
 
 void setup() {
   Serial.begin(9600);
