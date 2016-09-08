@@ -1,8 +1,9 @@
 //read
 
 int led = 9;
+int idle = 10;
 int brightness = 64;
-byte incomingByte;
+int incomingByte;
 
 void setup() {
   Serial.begin(9600);
@@ -19,7 +20,7 @@ void setup() {
 }
 
 void loop() {
-  analogWrite(led, 10);
+  analogWrite(led, idle);
   
   int sensorValue = digitalRead(A0);
 
@@ -28,9 +29,18 @@ void loop() {
   }
 
   if (Serial.available() > 0) {
-    incomingByte = Serial.read();
+    incomingByte = Serial.parseInt();
     Serial.print("I received: ");
-    Serial.println(incomingByte, 0);
+    Serial.println(incomingByte);
+      if (incomingByte == 0) {
+        brightness = 0;
+        idle = 0;
+        Serial.println("IF");
+      } else {
+        brightness = 64;
+        idle = 10;
+        Serial.println("ELSE");
+      }
   }
   
   delay(10);
