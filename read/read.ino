@@ -2,6 +2,7 @@
 
 int led = 9;
 int brightness = 64;
+byte incomingByte;
 
 void setup() {
   Serial.begin(9600);
@@ -23,8 +24,14 @@ void loop() {
   int sensorValue = digitalRead(A0);
 
   if (sensorValue == HIGH) {
-     analogWrite(led, brightness);
+    analogWrite(led, brightness);
   }
 
+  if (Serial.available() > 0) {
+    incomingByte = Serial.read();
+    Serial.print("I received: ");
+    Serial.println(incomingByte, 0);
+  }
+  
   delay(10);
 }
