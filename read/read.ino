@@ -30,16 +30,12 @@ void loop() {
 
   if (Serial.available() > 0) {
     incomingByte = Serial.parseInt();
-    Serial.print("I received: ");
-    Serial.println(incomingByte);
       if (incomingByte == 0) {
         brightness = 0;
         idle = 0;
-        Serial.println("IF");
       } else {
         brightness = 64;
         idle = 10;
-        Serial.println("ELSE");
       }
   }
   
