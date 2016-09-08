@@ -5,7 +5,6 @@ int brightness = 64;
 
 void setup() {
   Serial.begin(9600);
-  
   pinMode(led, OUTPUT);
 
   for (int x = 0; x <= 255; x++) {
@@ -21,10 +20,9 @@ void setup() {
 void loop() {
   analogWrite(led, 10);
   
-  int sensorValue = analogRead(A0);
-  Serial.println(sensorValue);
+  int sensorValue = digitalRead(A0);
 
-  if (sensorValue > 512) {
+  if (sensorValue == HIGH) {
      analogWrite(led, brightness);
   }
 
