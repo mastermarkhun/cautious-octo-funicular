@@ -23,7 +23,7 @@ void loop() {
     hddActivity();
     serialRead();
   } else {
-    slowPulse();
+    sleep();
   }
   delay(10);
 }
@@ -61,7 +61,7 @@ void pulse(int a, int b) {
   }
 }
 
-void slowPulse() {
+void sleep() {
   if (firstTry == true) {
     firstTry = false;
     analogWrite(led, 0);
