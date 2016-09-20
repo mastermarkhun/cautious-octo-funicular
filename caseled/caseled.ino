@@ -1,21 +1,22 @@
 //caseled
 
-const int led = 9;
+const byte led = 9;
+const byte hdd = A0;
+const byte pwr = A1;
 int idle = 10;
 int active = 64;
-int incomingByte;
-bool firstTry = true;
+bool firstTry;
 
 void setup() {
   Serial.begin(9600);
   pinMode(led, OUTPUT);
-  pinMode(A0,INPUT);
-  pinMode(A1,INPUT);
+  pinMode(hdd,INPUT);
+  pinMode(pwr,INPUT);
   pulse(255, 1);
 }
 
 void loop() {
-  int pwrSensor = digitalRead(A1);
+  int pwrSensor = digitalRead(pwr);
   if (pwrSensor == HIGH) {
     firstTry = true;
     analogWrite(led, idle);
@@ -28,7 +29,7 @@ void loop() {
 }
 
 void hddActivity() {
-  int sensorValue = digitalRead(A0);
+  int sensorValue = digitalRead(hdd);
   if (sensorValue == HIGH) {
     analogWrite(led, active);
   }  
@@ -36,7 +37,7 @@ void hddActivity() {
 
 void serialRead() {
   if (Serial.available() > 0) {
-    incomingByte = Serial.parseInt();
+    int incomingByte = Serial.parseInt();
     if (incomingByte == 0) {
       active = 0;
       idle = 0;
