@@ -31,4 +31,5 @@ expect "yes/no" {
 	} "*?assword" { send "<password>\r" }
 
 expect "# " { send "echo mgmt.led_enabled=$bool > /var/etc/persistent/cfg/mgmt\r" }
+expect "# " { send "save\r" }
 interact
