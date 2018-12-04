@@ -1,0 +1,1 @@
+$if($info(hdcd),'HDCD |') %codec% | %bitrate% kbps | $if2($info(bitspersample) bit,lossy) | %samplerate% Hz | %channels% | %playback_time%[ / %length%] $if(%__hdcd%,| Peak Extend: %__hdcd_peak_extend% | Gain: %__hdcd_gain% | Transient Filter: %__hdcd_transient_filter%' ')
