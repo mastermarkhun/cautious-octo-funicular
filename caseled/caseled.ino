@@ -30,7 +30,7 @@ void loop() {
 
 void hddActivity() {
   int sensorValue = digitalRead(hdd);
-  if (sensorValue == HIGH) {
+  if (sensorValue == LOW) {
     analogWrite(led, active);
   }  
 }
@@ -71,4 +71,3 @@ void sleep() {
   }
   delay(250);
 }
-
