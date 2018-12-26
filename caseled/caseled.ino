@@ -67,7 +67,7 @@ void sleep() {
     analogWrite(led, 0);
     delay(5000);
   } else {
-    pulse(64, 50);
+    pulse(32, 50);
   }
-  delay(250);
+  delay(1000);
 }
