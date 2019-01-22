@@ -7,7 +7,7 @@ $items = Get-ChildItem $folder | Sort-Object -Property "CreationTime"
 
 foreach ($item in $items)
 {
-    Get-ItemProperty -Path $item | %{Write-Verbose -Verbose "$($_.CreationTime)`t$item"}
+    Write-Verbose -Verbose "$($item.CreationTime)`t$item"
 
     Move-Item -Path $item -Destination $plexfolder
 
