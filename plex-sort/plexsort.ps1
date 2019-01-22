@@ -9,7 +9,7 @@ foreach ($item in $items)
 {
     Write-Verbose -Verbose "$($item.CreationTime)`t$item"
 
-    Move-Item -Path $item -Destination $plexfolder
+    Move-Item -Path $item -Destination $plexfolder -Verbose
 
     Start-Sleep -Seconds 30
 }
