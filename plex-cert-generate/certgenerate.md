@@ -1,4 +1,4 @@
-https://gist.github.com/srilankanchurro/fa3fdeb5cf10ebb251aa88338b8b37db
+# https://gist.github.com/srilankanchurro/fa3fdeb5cf10ebb251aa88338b8b37db
 
 smbclient -L //192.168.X.X
 
