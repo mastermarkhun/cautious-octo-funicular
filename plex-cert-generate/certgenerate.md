@@ -8,9 +8,9 @@ sudo mount -t cifs -o username=serverUserName //192.168.X.X/appdata /mnt/appdata
 
 cd /mnt/appdata/letsencrypt/keys/letsencrypt
 
-sudo openssl pkcs12 -export -out ~/certificate.pfx 
--inkey privkey.pem 
--in cert.pem 
+sudo openssl pkcs12 -export -out ~/certificate.pfx
+-inkey privkey.pem
+-in cert.pem
 -certfile chain.pem
 
 sudo mv ~/certificate.pfx /mnt/appdata/PlexMediaServer/data
