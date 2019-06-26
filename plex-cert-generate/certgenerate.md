@@ -1,8 +1,16 @@
 # https://gist.github.com/srilankanchurro/fa3fdeb5cf10ebb251aa88338b8b37db
 
-openssl pkcs12 -export -out ~/certificate.pfx \
+smbclient -L //192.168.200.225
+
+sudo mkdir /mnt/appdata
+
+sudo mount -t cifs -o username=serverUserName //192.168.200.225/appdata /mnt/appdata/
+
+cd /mnt/appdata/letsencrypt/keys/letsencrypt
+
+sudo openssl pkcs12 -export -out ~/certificate.pfx \
     -inkey privkey.pem \
     -in cert.pem \
     -certfile chain.pem
 
-mv ~/certificate.pfx /mnt/appdata/PlexMediaServer/data
+sudo mv ~/certificate.pfx /mnt/appdata/PlexMediaServer/data
