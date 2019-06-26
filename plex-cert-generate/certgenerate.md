@@ -1,11 +1,15 @@
 # https://gist.github.com/srilankanchurro/fa3fdeb5cf10ebb251aa88338b8b37db
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 smbclient -L //192.168.X.X
+=======
+smbclient -L //192.168.200.225
+>>>>>>> parent of fdf6a9d... Update certgenerate.md
 
 sudo mkdir /mnt/appdata
 
-sudo mount -t cifs -o username=serverUserName //192.168.X.X/appdata /mnt/appdata/
+sudo mount -t cifs -o username=serverUserName //192.168.200.225/appdata /mnt/appdata/
 
 cd /mnt/appdata/letsencrypt/keys/letsencrypt
 
