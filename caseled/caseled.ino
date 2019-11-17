@@ -17,13 +17,28 @@ void setup() {
 
 void loop() {
   int pwrSensor = digitalRead(pwr);
-  if (pwrSensor == HIGH) {
+  //Serial.println(pwrSensor); //debug
+  if (pwrSensor == HIGH)
+  {
+    // power on
+
     firstTry = true;
     analogWrite(led, idle);
     hddActivity();
-    serialRead();
-  } else {
-    sleep();
+    //serialRead();
+  }
+  else
+  {
+    // assume sleep
+    
+    if (firstTry == true) {
+      firstTry = false;
+      analogWrite(led, 0);
+      delay(5000);
+    } else {
+      pulse(32, 50);
+    }
+    delay(1000);
   }
   delay(10);
 }
@@ -33,6 +48,17 @@ void hddActivity() {
   if (sensorValue == LOW) {
     analogWrite(led, active);
   }  
+}
+
+void pulse(int a, int b) {
+  for (int x = 0; x <= a; x++) {
+    analogWrite(led, x);
+    delay(b);
+  }
+  for (int x = a-1; x >= 0; x--) {
+    analogWrite(led, x);
+    delay(b);
+  }
 }
 
 void serialRead() {
@@ -48,26 +74,4 @@ void serialRead() {
       pulse(255, 1);
     }
   }
-}
-
-void pulse(int a, int b) {
-  for (int x = 0; x <= a; x++) {
-    analogWrite(led, x);
-    delay(b);
-  }
-  for (int x = a-1; x >= 0; x--) {
-    analogWrite(led, x);
-    delay(b);
-  }
-}
-
-void sleep() {
-  if (firstTry == true) {
-    firstTry = false;
-    analogWrite(led, 0);
-    delay(5000);
-  } else {
-    pulse(32, 50);
-  }
-  delay(1000);
 }
