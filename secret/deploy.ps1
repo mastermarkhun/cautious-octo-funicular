@@ -89,12 +89,12 @@ foreach ($groupname in $DomainAdminGroups)
 
 Add-ADGroupMember -Identity 'InformationTechnologies' -Members $($InformationTechnologiesGroups | foreach {$_ -replace '\s',''})
 
-foreach ($group in $OperationsGroups)
+foreach ($group in $($OperationsGroups | where {$_ -ne 'Information Technologies'}))
 {
-    Add-ADGroupMember -Identity $group -Members @($names | Get-Random -Count 2 | foreach {$splitname[0].Substring(0,3) + $splitname[1].Substring(0,2)})
+    Add-ADGroupMember -Identity $($group -replace '\s','') -Members @($names | Get-Random -Count 2 | foreach {$_.split(" ")[0].Substring(0,3) + $_.split(" ")[1].Substring(0,2)})
 }
 
-Add-ADGroupMember -Identity 'IT Services' -Members @($names | Get-Random | foreach {$splitname[0].Substring(0,3) + $splitname[1].Substring(0,2)})
+Add-ADGroupMember -Identity 'ITServices' -Members @($names | Get-Random | foreach {$splitname[0].Substring(0,3) + $splitname[1].Substring(0,2)})
 
 Add-ADGroupMember -Identity 'Domain Admins' -Members 'InformationTechnologies'
 Add-ADGroupMember -Identity 'Domain Admins' -Members $($DomainAdminGroups | foreach {$_ -replace '\s',''})
