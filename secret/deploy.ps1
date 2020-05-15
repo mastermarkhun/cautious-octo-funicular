@@ -56,7 +56,7 @@ foreach ($person in $names)
     $splitname = $person.Split(" ")
     $samaccname = $splitname[0].Substring(0,3) + $splitname[1].Substring(0,2)
 
-    $length = 5 ## characters
+    $length = 10 ## characters
     $nonAlphaChars = 0
     $password = [System.Web.Security.Membership]::GeneratePassword($length, $nonAlphaChars)
     $secPw = ConvertTo-SecureString -String $password -AsPlainText -Force
@@ -68,33 +68,33 @@ foreach ($person in $names)
 
 foreach ($groupname in $OperationsGroups)
 {
-    $samaccname = @($groupname -replace '\s','')
+    $samaccname = $groupname -replace '\s',''
 
     New-ADGroup -Name $groupname -SamAccountName $samaccname -GroupCategory Security -GroupScope Global -DisplayName $groupname -Path "OU=Operations,$domainDN"
 }
 
 foreach ($groupname in $InformationTechnologiesGroups)
 {
-    $samaccname = @($groupname -replace '\s','')
+    $samaccname = $groupname -replace '\s',''
 
     New-ADGroup -Name $groupname -SamAccountName $samaccname -GroupCategory Security -GroupScope Global -DisplayName $groupname -Path "CN=Users,$domainDN"
 }
 
 foreach ($groupname in $DomainAdminGroups)
 {
-    $samaccname = @($groupname -replace '\s','')
+    $samaccname = $groupname -replace '\s',''
 
     New-ADGroup -Name $groupname -SamAccountName $samaccname -GroupCategory Security -GroupScope Global -DisplayName $groupname -Path "CN=Users,$domainDN"
 }
 
-Add-ADGroupMember -Identity 'InformationTechnologies' -Members $InformationTechnologiesGroups
+Add-ADGroupMember -Identity 'InformationTechnologies' -Members $($InformationTechnologiesGroups | foreach {$_ -replace '\s',''})
 
 foreach ($group in $OperationsGroups)
 {
-    Add-ADGroupMember -Identity $group -Members @($names | Get-Random -Count 2)
+    Add-ADGroupMember -Identity $group -Members @($names | Get-Random -Count 2 | foreach {$splitname[0].Substring(0,3) + $splitname[1].Substring(0,2)})
 }
 
-Add-ADGroupMember -Identity 'IT Services' -Members @($names | Get-Random)
+Add-ADGroupMember -Identity 'IT Services' -Members @($names | Get-Random | foreach {$splitname[0].Substring(0,3) + $splitname[1].Substring(0,2)})
 
 Add-ADGroupMember -Identity 'Domain Admins' -Members 'InformationTechnologies'
-Add-ADGroupMember -Identity 'Domain Admins' -Members $DomainAdminGroups
+Add-ADGroupMember -Identity 'Domain Admins' -Members $($DomainAdminGroups | foreach {$_ -replace '\s',''})
