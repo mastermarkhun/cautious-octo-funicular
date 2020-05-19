@@ -91,7 +91,7 @@ Add-ADGroupMember -Identity 'InformationTechnologies' -Members $($InformationTec
 
 foreach ($group in $($OperationsGroups | where {$_ -ne 'Information Technologies'}))
 {
-    Add-ADGroupMember -Identity $($group -replace '\s','') -Members @($names | Get-Random -Count 2 | foreach {$_.split(" ")[0].Substring(0,3) + $_.split(" ")[1].Substring(0,2)})
+    Add-ADGroupMember -Identity $($group -replace '\s','') -Members @($names | Get-Random -Count 3 | foreach {$_.split(" ")[0].Substring(0,3) + $_.split(" ")[1].Substring(0,2)})
 }
 
 Add-ADGroupMember -Identity 'ITServices' -Members @($names | Get-Random | foreach {$splitname[0].Substring(0,3) + $splitname[1].Substring(0,2)})

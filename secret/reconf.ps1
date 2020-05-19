@@ -18,6 +18,7 @@ $oldnames = @(
 
 foreach ($person in $oldnames)
 {
+    $splitname = $person.Split(" ")
     $samaccname = $splitname[0].Substring(0,3) + $splitname[1].Substring(0,2)
     Remove-ADUser -Identity $samaccname
 }
@@ -27,6 +28,15 @@ exit
 $newsurname = 'Kovács'
 $newnames = @(
     'Vilmos', 'Richárd', 'Kinga', 'Dominik', 'Szonja', 'Adrián', 'Zoé', 'György', 'Attila', 'Gyula', 'Adrienn'
+)
+
+$OrgUnits = @(
+    'Sales and Marketing',
+    'Product Management',
+    'Operations',
+    'Legal Division',
+    'Finance Division',
+    'New products Division'
 )
 
 $OperationsGroups = @(
